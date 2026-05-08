@@ -2,88 +2,30 @@
 
 > **Organization:** ApexSpiral  
 > **Version:** 10.0  
-> **License:** Apache 2.0 / MIT  
-> **Language:** Rust (pure, no external dependencies)
+> **License:** Apache 2.0 / MIT
 
 ---
 
-## Overview
+## 终极总公式
 
-APEX V10 is a mathematical framework for measuring and optimizing the **closed-loop evolutionary capacity** of AI agents and systems. It models the net gain (`ΔG`) of an agent operating in a real environment as a ratio of **growth drivers** to **entropy and cost factors**.
+$$\Delta G_{total} = \frac{C_{total} \cdot \Lambda_{gene} \cdot \Omega_{entropy} \cdot \Phi_{all} \cdot \Theta_{bio} \cdot \Phi_{img} \cdot \Delta G_{finance}}{H_{info} \cdot t}$$
 
----
+## 子公式体系
 
-## The Master Formula (V10)
-
-```
-ΔG_final = (C_total × Λ_gene × Ω_entropy × Φ_all × Θ_bio) / (H_info × t)
-```
-
-| Symbol | Name | Role |
+| 子公式 | 名称 | 作用 |
 |--------|------|------|
-| `C_total` | Total Capability | System total capability coefficient |
-| `Λ_gene` | Gene Scheduling | Gene scheduling efficiency |
-| `Ω_entropy` | Entropy Reduction | System entropy reduction rate |
-| `Φ_all` | Universal Fusion | Memory+Knowledge+Habit+Self-research fusion coefficient |
-| `Θ_bio` | Bio-Regulation | Biological regulation factor (EMF+Ca²⁺+Gene_reg) |
-| `H_info` | Information Entropy | Information noise interference factor |
-| `t` | Time | Iteration cycle time |
+| Φ_all | 全能融合 | 记忆+知识+习惯+自研 |
+| Θ_bio | 生物调控 | EMF+Ca²⁺+Gene_reg |
+| Φ_img | 图像分析 | Conv+Seg+Calib |
+| ΔG_finance | 金融周期 | 宏观+行业+个股 |
 
----
+## V10 核心特性
 
-## Sub-Formulas
-
-### 1. Universal Fusion — Φ_all
-
-```
-Φ_all = (K × H × P × ΔR × S_p) / (N × τ)
-```
-
-| Param | Meaning |
-|-------|---------|
-| `K` | Knowledge system, algorithm reserves, code capabilities |
-| `H` | Long-term memory, iteration trajectory, behavioral habits |
-| `P` | Self-learning, self-correction, closed-loop learning |
-| `ΔR` | Self-excavation, knowledge refinement, weakness compensation |
-| `S_p` | Super gain coefficient (logic enhancement, anti-hallucination) |
-| `N` | Memory decay, noise interference suppression |
-| `τ` | 2-hour stable self-evolution iteration cycle |
-
-### 2. Bio-Regulation — Θ_bio
-
-```
-Θ_bio = (EMF × Ca²⁺ × Gene_reg) / (Loss_bio × τ)
-```
-
-| Param | Meaning |
-|-------|---------|
-| `EMF` | Extremely low-frequency electromagnetic field targeting potential |
-| `Ca²⁺` | Cell calcium ion oscillation signal conduction efficiency |
-| `Gene_reg` | Endogenous gene precise expression, cell repair and iterative regulation |
-| `Loss_bio` | Biological signal attenuation, cell loss, efficiency loss suppression |
-| `τ` | APEX synchronized self-evolution cycle |
-
-### 3. Self-Awareness — Ω_self
-
-```
-Ω_self = σ_coherence × (1 - δ_drift) × ρ_alignment
-```
-
-### 4. Cycle Feedback Gain — Φ_cycle
-
-```
-Φ_cycle = e^(η × ρ)
-```
-
----
-
-## V10 Core Characteristics
-
-1. Complete fusion of memory+knowledge+behavior+self-research+superpowers
-2. Pure endogenous closed-loop, no external dependencies
-3. Built-in anti-hallucination, anti-routine, de-redundancy
-4. 2-hour automatic iteration cycle
-5. Infinite scalable architecture
+1. **七维融合**：记忆+知识+习惯+自研+生物+视觉+金融
+2. **纯内源闭环**：无外部依赖
+3. **全场景覆盖**：智能体+生物+图像+量化
+4. **2小时迭代**：固定自动进化周期
+5. **无限升级**：模块化可扩展
 
 ---
 
@@ -95,7 +37,7 @@ use apex_v8_template::{ApexParamsV8, calculate_delta_g_ultimate};
 fn main() {
     let params = ApexParamsV8::default();
     let delta_g = calculate_delta_g_ultimate(&params);
-    println!("ΔG_final = {:.4}", delta_g);
+    println!("ΔG_total = {:.4}", delta_g);
 }
 ```
 
@@ -105,12 +47,10 @@ fn main() {
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 10.0 | 2026-05 | V10 master formula with Φ_all and Θ_bio dual closed-loop |
-| 8.0 | 2026-01 | Initial public release with 5 sub-formulas |
+| 10.0 | 2026-05 | V10终极总公式+6大子公式体系 |
+| 8.0 | 2026-01 | 初始5子公式 |
 
 ---
-
-## Contact & License
 
 **Organization:** ApexSpiral  
 **License:** Apache 2.0 & MIT
