@@ -1460,6 +1460,291 @@ pub fn calculate_dawn_omega(params: &DawnParams) -> f64 {
     params.omega_dawn * git_sync * auto_learn
 }
 
+// ═════════════════════════════════════════════════════════════════════════════
+// Γ_AMC: Apoptosis-Memory-Crystal 系数
+// Γ_AMC = (ΔForward / ΔFootprint) × Crystal_ratio
+//
+// 含义：细胞凋亡率与记忆晶体化率的复合度量
+//   ΔForward ∈ [0.34, 0.43] — 前进距离增量（34-43%）
+//   ΔFootprint = 0.62 — 空间占用增量（固定62%）
+//   Crystal_ratio ∈ [0.0, 1.0] — 晶体化比率（Liquid→Glass→Crystal）
+// ═════════════════════════════════════════════════════════════════════════════
+
+#[derive(Debug, Clone)]
+pub struct GammaAMCParams {
+    pub delta_forward: f64,    // 34-43% → 0.34-0.43
+    pub delta_footprint: f64,  // 62% → 0.62
+    pub crystal_ratio: f64,    // 0.0-1.0 (Liquid→Glass→Crystal)
+}
+
+impl Default for GammaAMCParams {
+    fn default() -> Self {
+        GammaAMCParams {
+            delta_forward: 0.38,
+            delta_footprint: 0.62,
+            crystal_ratio: 0.5,
+        }
+    }
+}
+
+/// Γ_AMC = (ΔForward / ΔFootprint) × Crystal_ratio
+pub fn calculate_gamma_amc(params: &GammaAMCParams) -> f64 {
+    let delta_forward = params.delta_forward.clamp(0.0, 1.0);
+    let delta_footprint = params.delta_footprint.max(0.001); // 防除零
+    let crystal_ratio = params.crystal_ratio.clamp(0.0, 1.0);
+    (delta_forward / delta_footprint) * crystal_ratio
+}
+
+/// Γ_AMC 无参数便捷版本（使用默认值）
+pub fn calculate_gamma_amc_default(delta_forward: f64, crystal_ratio: f64) -> f64 {
+    calculate_gamma_amc(&GammaAMCParams {
+        delta_forward,
+        delta_footprint: 0.62,
+        crystal_ratio,
+    })
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// Γ_FAN: Flow-Apoptosis-Niche 系数
+// Γ_FAN = (Apoptosis_score × IntraStain_quality) / (BSL_Risk × CV)
+//
+// 含义：细胞凋亡率与染色质量的环境适应性度量
+//   Apoptosis_score ∈ [0.0, 1.0] — 凋亡评分
+//   IntraStain_quality ∈ [0.0, 1.0] — 染色质量
+//   BSL_Risk ∈ [1.0, 3.0] — 生物安全等级（BSL-1 to BSL-3）
+//   CV ∈ [0.0, 1.0] — 变异系数（Coefficient of Variation）
+// ═════════════════════════════════════════════════════════════════════════════
+
+#[derive(Debug, Clone)]
+pub struct GammaFANParams {
+    pub apoptosis_score: f64,      // 0.0-1.0
+    pub intrastain_quality: f64,   // 0.0-1.0
+    pub bsl_risk: f64,             // 1.0-3.0 (BSL-1 to BSL-3)
+    pub cv: f64,                   // 变异系数 0.0-1.0
+}
+
+impl Default for GammaFANParams {
+    fn default() -> Self {
+        GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 1.0,
+            cv: 0.2,
+        }
+    }
+}
+
+/// Γ_FAN = (Apoptosis_score × IntraStain_quality) / (BSL_Risk × CV)
+pub fn calculate_gamma_fan(params: &GammaFANParams) -> f64 {
+    let apoptosis = params.apoptosis_score.clamp(0.0, 1.0);
+    let quality = params.intrastain_quality.clamp(0.0, 1.0);
+    let bsl = params.bsl_risk.clamp(1.0, 3.0);
+    let cv = params.cv.max(0.001); // 防除零
+    (apoptosis * quality) / (bsl * cv)
+}
+
+/// Γ_FAN 无参数便捷版本
+pub fn calculate_gamma_fan_default(apoptosis_score: f64, intrastain_quality: f64) -> f64 {
+    calculate_gamma_fan(&GammaFANParams {
+        apoptosis_score,
+        intrastain_quality,
+        bsl_risk: 1.0,
+        cv: 0.2,
+    })
+}
+
+#[cfg(test)]
+mod gamma_amc_tests {
+    use super::*;
+
+    #[test]
+    fn test_gamma_amc_basic() {
+        // Γ_AMC = (0.38 / 0.62) × 0.5 ≈ 0.306
+        let params = GammaAMCParams::default();
+        let result = calculate_gamma_amc(&params);
+        assert!((result - 0.3064516).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_amc_perfect_crystal() {
+        // Crystal_ratio = 1.0 → Γ_AMC = ΔForward / ΔFootprint
+        let params = GammaAMCParams {
+            delta_forward: 0.40,
+            delta_footprint: 0.62,
+            crystal_ratio: 1.0,
+        };
+        let result = calculate_gamma_amc(&params);
+        assert!((result - 0.64516).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_amc_zero_crystal() {
+        // Crystal_ratio = 0 → Γ_AMC = 0
+        let params = GammaAMCParams {
+            delta_forward: 0.40,
+            delta_footprint: 0.62,
+            crystal_ratio: 0.0,
+        };
+        let result = calculate_gamma_amc(&params);
+        assert!((result - 0.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_amc_max_forward() {
+        // ΔForward = 0.43 (max), Crystal = 1.0
+        let params = GammaAMCParams {
+            delta_forward: 0.43,
+            delta_footprint: 0.62,
+            crystal_ratio: 1.0,
+        };
+        let result = calculate_gamma_amc(&params);
+        assert!((result - 0.6935).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_amc_div_footprint_fixed() {
+        // 验证 ΔFootprint 固定 0.62 时，不同 ΔForward 的比例关系
+        let r1 = calculate_gamma_amc_default(0.34, 1.0);
+        let r2 = calculate_gamma_amc_default(0.43, 1.0);
+        let ratio = r2 / r1;
+        assert!((ratio - 0.43 / 0.34).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_amc_clamp_inputs() {
+        // 输入超过 1.0 应被 clamp
+        let params = GammaAMCParams {
+            delta_forward: 2.0,  // 过大的值
+            delta_footprint: 0.62,
+            crystal_ratio: 2.0,  // 过大的值
+        };
+        let result = calculate_gamma_amc(&params);
+        // (1.0 / 0.62) * 1.0 ≈ 1.6129
+        assert!((result - 1.6129).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_gamma_amc_zero_footprint_protection() {
+        // ΔFootprint = 0 → 使用 0.001 防除零
+        let params = GammaAMCParams {
+            delta_forward: 0.38,
+            delta_footprint: 0.0,
+            crystal_ratio: 0.5,
+        };
+        let result = calculate_gamma_amc(&params);
+        // (0.38 / 0.001) * 0.5 = 190.0
+        assert!((result - 190.0).abs() < 0.001);
+    }
+}
+
+#[cfg(test)]
+mod gamma_fan_tests {
+    use super::*;
+
+    #[test]
+    fn test_gamma_fan_basic() {
+        // Γ_FAN = (0.5 × 0.7) / (1.0 × 0.2) = 0.35 / 0.2 = 1.75
+        let params = GammaFANParams::default();
+        let result = calculate_gamma_fan(&params);
+        assert!((result - 1.75).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_bsl3_higher_risk() {
+        // BSL-3 (bsl_risk = 3.0) 应降低 Γ_FAN
+        let params = GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 3.0,
+            cv: 0.2,
+        };
+        let result = calculate_gamma_fan(&params);
+        // (0.5 × 0.7) / (3.0 × 0.2) = 0.35 / 0.6 ≈ 0.5833
+        assert!((result - 0.5833).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_zero_apoptosis() {
+        // Apoptosis = 0 → Γ_FAN = 0
+        let params = GammaFANParams {
+            apoptosis_score: 0.0,
+            intrastain_quality: 0.7,
+            bsl_risk: 1.0,
+            cv: 0.2,
+        };
+        let result = calculate_gamma_fan(&params);
+        assert!((result - 0.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_high_cv() {
+        // CV 增大 → Γ_FAN 减小
+        let params_low_cv = GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 1.0,
+            cv: 0.1,
+        };
+        let params_high_cv = GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 1.0,
+            cv: 0.5,
+        };
+        let r_low = calculate_gamma_fan(&params_low_cv);
+        let r_high = calculate_gamma_fan(&params_high_cv);
+        assert!(r_low > r_high);
+    }
+
+    #[test]
+    fn test_gamma_fan_zero_cv_protection() {
+        // CV = 0 → 使用 0.001 防除零
+        let params = GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 1.0,
+            cv: 0.0,
+        };
+        let result = calculate_gamma_fan(&params);
+        // (0.5 × 0.7) / (1.0 × 0.001) = 350.0
+        assert!((result - 350.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_clamp_bsl() {
+        // BSL 超出 [1.0, 3.0] 范围应被 clamp
+        let params = GammaFANParams {
+            apoptosis_score: 0.5,
+            intrastain_quality: 0.7,
+            bsl_risk: 10.0,  // 超出范围
+            cv: 0.2,
+        };
+        let result = calculate_gamma_fan(&params);
+        // bsl 被 clamp 到 3.0: (0.5 × 0.7) / (3.0 × 0.2) = 0.5833
+        assert!((result - 0.5833).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_default_convenience() {
+        // 便捷版本默认 BSL=1.0, CV=0.2
+        let result = calculate_gamma_fan_default(0.5, 0.7);
+        assert!((result - 1.75).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_gamma_fan_perfect_quality() {
+        // Apoptosis=1.0, Quality=1.0, BSL=1.0, CV=0.1 → 最大值
+        let params = GammaFANParams {
+            apoptosis_score: 1.0,
+            intrastain_quality: 1.0,
+            bsl_risk: 1.0,
+            cv: 0.1,
+        };
+        let result = calculate_gamma_fan(&params);
+        assert!((result - 10.0).abs() < 0.001);
+    }
+}
+
 #[cfg(test)]
 mod dawn_tests {
     use super::*;
