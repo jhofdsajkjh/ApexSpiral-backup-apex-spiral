@@ -635,7 +635,7 @@ pub fn from_apex_params(old: &super::ApexParams) -> ApexParamsV8 {
         t_iteration: old.t as f64,
         llm_agent: LlmAgentParams {
             lambda_single_call: old.lambda_gene,
-            mu_multi_task: 1.0,
+            mu_multi_task: 0.81, // GitHub实证: LangGraph/AutoGen/Swarm四项目加权
             sigma_high_quality: old.omega_entropy,
             gamma_llm_cost: 0.1,
         },
@@ -652,8 +652,8 @@ pub fn from_apex_params(old: &super::ApexParams) -> ApexParamsV8 {
             kappa_no_repeat: 1.0,
         },
         cycle: CycleParams {
-            eta_skill_up: 0.5,
-            rho_result_feedback: 0.5,
+            eta_skill_up: 0.70,  // GitHub实证: Magnetic-One专家分工模式
+            rho_result_feedback: 0.75, // GitHub实证: CrewAI人类反馈循环平衡点
         },
         host: HostHealthParams {
             psi_mem: 1.0,
@@ -689,7 +689,7 @@ mod tests {
             t_iteration: 2.0,
             llm_agent: LlmAgentParams {
                 lambda_single_call: 0.9,
-                mu_multi_task: 0.85,
+                mu_multi_task: 0.81, // GitHub实证: LangGraph/AutoGen/Swarm
                 sigma_high_quality: 0.88,
                 gamma_llm_cost: 0.1,
             },
@@ -706,8 +706,8 @@ mod tests {
                 kappa_no_repeat: 1.0,
             },
             cycle: CycleParams {
-                eta_skill_up: 0.5,
-                rho_result_feedback: 0.5,
+                eta_skill_up: 0.70,  // GitHub实证: Magnetic-One专家分工
+                rho_result_feedback: 0.75, // GitHub实证: CrewAI人类反馈
             },
             host: HostHealthParams {
                 psi_mem: 0.98,
