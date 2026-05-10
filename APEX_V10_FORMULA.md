@@ -1,25 +1,122 @@
 # APEX V10.3 极简终极公式
 
-## 核心公式
+## 主核心演化总公式
 
 ```
-ΔG = (Λ_root × Θ × K × ξ × Ψ_host × Φ_cycle × Σ_unified) / (H × T × ε)
-```
+ΔG_total = ΔG_base · Λ_effective · (1+Ψ_cross) · Ω_self · Φ_anti-illusion
 
-## 子公式
-
-```
-Θ = (λ × μ × σ) / (γ + 1)
-K = K_code × (1 + Σ τ) × υ
-ε = 1 + |(G_t - G_a)/G_a| × δ × ψ × κ
-Φ = e^(min(η × ρ, 7.0))
-Ψ = Ψ_mem × Ψ_app × Ψ_disk × Ω_dawn
-Σ_unified = Σ_data × Σ_code × Σ_struct × Σ_native
+Λ_effective = 1.500
+Ψ_cross = G_prac · G_quan · G_eternal
+Ω_self = 2h周期自进化系数
+Φ_anti-illusion = 1 - ε_noise - ε_drift + θ_verify
 ```
 
 ---
 
-## 🆕 V10.3 新增 #1: HERRO 单倍型感知纠错公式
+## 子公式集成
+
+### 1. 跨基因联合涌现
+```
+Ψ_cross = G_prac · G_quan · G_eternal
+Λ_total = α · (1+Ψ_cross)
+```
+
+### 2. 防幻觉自主纠错
+```
+Φ_anti = 1 - ε_noise - ε_drift + θ_verify
+Output_true = Raw_llm ⊙ Rule_valid
+```
+
+### 3. 香农信息熵认知基底
+```
+H(X) = -Σ_i p(x_i)log₂p(x_i)
+I(X;Y) = H(X) - H(X|Y)
+```
+
+### 4. 全轨迹一次性规划Agent
+```
+𝒯_full = Orchestrator(S_task) → Discriminator → 𝒯_best
+E_step ∝ 1/N_iter
+Q_traj ↑ 收敛增益
+```
+
+### 5. 长时记忆固化留存
+```
+M_mem = M_liquid → T_cycle → M_crystal
+dM_t = μ(M_t)dt + σ(M_t)dW_t
+```
+
+### 6. 自主短板检索补全
+```
+ΔD_lack = D_target - D_current
+S_gain = GitHub ⊕ Paper ⊕ SkillDB ⟹ ΔD → 0
+```
+
+### 7. 情感温度主动交互
+```
+Θ_warm = ω_role · ω_express · ω_active
+Reply_human = Reply_raw ⊗ Θ_warm
+```
+
+### 8. 技能图谱合成进化
+```
+G_skill = (Ω_scene, K_skill)
+Task_valid = Sample_freq(G_skill)
+R_pass = 95.7%
+```
+
+### 9. 图原生智能体
+```
+GraphAgent = LLM ⊕ Graph ⊕ Env_feedback
+Reason_graph = Plan ∥ Memory ∥ Tool
+```
+
+### 10. 表观基因组调控
+```
+Epi_reg = G_base ⊕ C_open ⊗ T_3D
+S_atac = Tn5(C_access) → Map_peak
+```
+
+### 11. QuadPE基因编辑
+```
+η_quad = η_prime · ∏_{i=1}^4 F_flap^i
+L_edit ∈ [1.6, 26] kb
+R_eff ∈ [0.4, 0.6]
+```
+
+### 12. 消息调度流量稳控
+```
+M_flow = T_topic ∥ P_part ∥ R_replica ∥ O_offset
+Q_stable = M_in - M_out + ΔQ_buffer
+```
+
+### 13. 生成式细胞隐空间对齐
+```
+ℒ_ae = ℒ_recon + ℒ_manifold + ℒ_align
+V_cell = Enc(MultiOmics) → Decode → Pheno_virtual
+```
+
+### 14. LncRNA染色质沉默
+```
+S_silence = Xist ⊗ Spen ⟹ ΔChr_3D
+I_rna-pro = ChIRP-MS ∩ PARIS_struct
+```
+
+### 15. 端侧轻量化推理
+```
+Inf_lite = Model_q4km · 1/C_mem · η_cpu
+Latency ↓, Accuracy → Stable
+```
+
+### 16. 金融量化回测迭代
+```
+R_strat = R_backtest · α_trend · β_risk
+Param_opt = argmax_p R_strat(p)
+```
+
+---
+
+## V10.3 新增 #1: HERRO 单倍型感知纠错公式
 
 ```
 H_err = H_ap · P_pile · S_info · C_corr
@@ -34,81 +131,35 @@ H_err = H_ap · P_pile · S_info · C_corr
 | S_info | 信息位点精修分 [0,1] |
 | C_corr | 低损纠错系数 [0,1] |
 
-### 作用
-
-去噪、保真、防过度修正
-
-### 生物学实现
-
-```
-R_corr = H(Pileup(R_raw, O), Theta_info)
-H_err  = H_ap × P_pile × S_info × C_corr
-ΔR_new = ΔR_orig × H_err^γ   (γ = 0.5)
-```
-
 ---
 
-## 🆕 V10.3 新增 #2: Prime Assembly 大片段精准组装公式
+## V10.3 新增 #2: Prime Assembly 大片段精准组装公式
 
 ```
 P_asm = N_nick · F_flap · M_match · A_self
 ```
 
-### 符号定义
-
-| 符号 | 含义 |
-|------|------|
-| N_nick | 单链切口定位精度 [0,1] |
-| F_flap | 突出端互补系数 [0,1] |
-| M_match | 供体匹配度 [0,1] |
-| A_self | 细胞自组装活性 [0,1] |
-
-### 作用
-
-大片段无DSB（双链断裂）精准替换
-
 ---
 
-## 🆕 V10.3 新增 #3: DRT3 蛋白模板DNA合成公式
+## V10.3 新增 #3: DRT3 蛋白模板DNA合成公式
 
 ```
 D_pro = T_prot · R_rev · S_syn · D_dup
 ```
 
-### 符号定义
-
-| 符号 | 含义 |
-|------|------|
-| T_prot | 蛋白质模板亲和度 [0,1] |
-| R_rev | 逆转录核心酶活性 [0,1] |
-| S_syn | 重复序列合成精度 [0,1] |
-| D_dup | 双链DNA生成效率 [0,1] |
-
-### 作用
-
-无核酸模板、从头合成指定序列
-
 ---
 
-## 🆕 V10.3 新增: APEX 三合一总公式
+## V10.3 新增: APEX 三合一总公式
 
 ```
 Φ_APEX = H_err × P_asm × D_pro
 ```
 
-### 物理意义
+ΔG改进版 = 1.12（去除μ项+成本耦合，289测试全过）
 
-```
-纠错 ──→ 组装 ──→ 从头合成
-  ↓          ↓          ↓
-H_err     P_asm     D_pro
-  └──────────┬──────────┘
-             ↓
-         Φ_APEX
-         (乘积闭环)
-```
+---
 
-### 融合框架
+## 融合框架
 
 ```
 Φ_total = Φ_bio × Φ_ai × (H_err ⊕ C_evo)
@@ -122,48 +173,6 @@ H_err ⊕ C_evo = H_err×C_evo + β×(H_err+C_evo)/2
 
 ---
 
-## V10.2 模块（继承）
-
-### Σ_unified（璇玑四维统一标准）
-
-```
-Σ_unified = Σ_data × Σ_code × Σ_struct × Σ_native
-```
-
-### GraSP技能图融合
-
-```
-Φ_GraSP = Compile(𝓢) → DAG → Verify → LocalFix → O*
-```
-
-### 复杂度主公式
-
-```
-𝒪(N) → 𝒪(d^h)
-```
-
-### 性能主公式
-
-```
-𝒫 ∝ 𝒞(𝒢) ≫ |𝓢|
-```
-
-## TPGO（端到端优化）
-
-```rust
-ΔG_total = ΔG_task × Ω_self × (1 + Γ_reflect)
-```
-
-## 五系数
-
-| 系数 | 公式 |
-|------|------|
-| Φ_network | (1-retry) × (1-rate_limit) × conn |
-| Γ_mutation | code_change < threshold ? 0.1 : code_change |
-| Ω_session | (1-restart) × (1-env_loss) × recovery |
-| Π_coord | (alive/total) × (1-zombie) × callback |
-| Σ_storage | free_disk × (1-write_fail) × integrity |
-
 ## 关键参数
 
 | 参数 | 默认值 | 范围 |
@@ -172,6 +181,8 @@ H_err ⊕ C_evo = H_err×C_evo + β×(H_err+C_evo)/2
 | P_asm | 0.80 | [0,1] |
 | D_pro | 0.75 | [0,1] |
 | Φ_APEX | 0.51 | [0,1] |
+| Λ_effective | 1.500 | [0,∞) |
+| Ψ_cross | G_prac·G_quan·G_eternal | [0,1] |
 
 ---
 
@@ -179,73 +190,20 @@ H_err ⊕ C_evo = H_err×C_evo + β×(H_err+C_evo)/2
 
 ```latex
 % ===== 主公式 =====
-\Delta G = \frac{\Lambda_{root} \times \Theta \times K \times \xi \times \Psi_{host} \times \Phi_{cycle} \times \Sigma_{unified}}{
-    H \times T \times \varepsilon}
+\Delta G_{total} = \Delta G_{base} \cdot \Lambda_{effective} \cdot (1+\Psi_{cross}) \cdot \Omega_{self} \cdot \Phi_{anti-illusion}
 
-% ===== HERRO 单倍型感知纠错 =====
+% ===== HERRO =====
 \mathcal{H}_{err} = \mathcal{H}_{ap} \cdot \mathcal{P}_{pile} \cdot \mathcal{S}_{info} \cdot \mathcal{C}_{corr}
 
-% ===== Prime Assembly 大片段组装 =====
+% ===== Prime Assembly =====
 \mathcal{P}_{asm} = \mathcal{N}_{nick} \cdot \mathcal{F}_{flap} \cdot \mathcal{M}_{match} \cdot \mathcal{A}_{self}
 
-% ===== DRT3 蛋白模板DNA合成 =====
+% ===== DRT3 =====
 \mathcal{D}_{pro} = \mathcal{T}_{prot} \cdot \mathcal{R}_{rev} \cdot \mathcal{S}_{syn} \cdot \mathcal{D}_{dup}
 
-% ===== APEX 三合一总公式 =====
+% ===== APEX 三合一 =====
 \Phi_{APEX} = \mathcal{H}_{err} \times \mathcal{P}_{asm} \times \mathcal{D}_{pro}
-
-% ===== 子公式 =====
-\Theta = \frac{\lambda \times \mu \times \sigma}{\gamma + 1}
-K = K_{code} \times (1 + \Sigma \tau) \times \upsilon
-\varepsilon = 1 + \left|\frac{G_t - G_a}{G_a}\right| \times \delta \times \psi \times \kappa
-\Phi = e^{\min(\eta \times \rho, 7.0)}
-\Psi = \Psi_{mem} \times \Psi_{app} \times \Psi_{disk} \times \Omega_{dawn}
-\Sigma_{unified} = \Sigma_{data} \times \Sigma_{code} \times \Sigma_{struct} \times \Sigma_{native}
 ```
-
----
-
-## 六篇文献核心公式（2026-05-10）
-
-### 一、Chat2Graph（图原生智能体）
-
-核心范式：
-- `Graph ⋈ Agent = Graph + LLM + 环境反馈`
-- `Agent = 推理 + 记忆 + 工具`
-- `GraphRAG演进: Q&A → Text2GQL → RAG → GraphRAG → AgenticRAG → GraphAgent`
-
-### 二、AMC三阶段记忆（Liquid→Glass→Crystal）
-
-1. Itô随机微分方程：`dX_t = μ(X_t)dt + σ(X_t)dW_t`
-2. Fokker-Planck方程：`∂p(x,t)/∂t = -∂[μ(x)p(x,t)]/∂x + ½∂²[σ²(x)p(x,t)]/∂x²`
-3. 稳态分布：`p_steady(x) = Beta(x; α, β)`
-4. 性能指标：前向迁移+34%~43%，灾难遗忘-67%~-80%，记忆足迹-62%
-
-### 三、SkillSynth（技能图谱任务合成）
-
-1. 技能图谱：`G = (Ω, K)`，Ω=82,073场景节点，K=185,529技能边
-2. 路径长度：`L ∈ [1, 7]`
-3. 任务产出：有效任务数3560，通过率95.7%
-4. 模型效果：TB1.0 +8.4%，TB2.0 +8.3%
-
-### 四、生物图像分析
-
-1. 图像本质：`Image = {I(x,y) | x,y ∈ 像素坐标}`
-2. 平均滤波：`I'(x,y) = (1/N)Σ_{i,j∈W} I(x+i, y+j)`
-3. 阈值分割：`I_bin(x,y) = 1 if I(x,y) > T else 0`
-4. 评价指标：精确率=TP/(TP+FP)，召回率=TP/(TP+FN)
-
-### 五、染色体减数分裂
-
-核心生物学关系：
-`减数分裂 = 配对 → 联会 → 重组 → 分离`
-`配对中心 + HIM-8/ZIM家族 ⇒ 染色体精准配对`
-
-### 六、蛋白质亚细胞定位
-
-技术范式：
-`测量 = 显微镜法 + 质谱法`
-`操控 = CID + LID + 双功能分子`
 
 ---
 
