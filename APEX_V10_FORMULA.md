@@ -1,149 +1,138 @@
 # APEX V10.3 极简终极公式
 
-## 主核心演化总公式
-
-```
-ΔG_total = ΔG_base · Λ_effective · (1+Ψ_cross) · Ω_self · Φ_anti-illusion
-
-Λ_effective = 1.500
-Ψ_cross = G_prac · G_quan · G_eternal
-Ω_self = 2h周期自进化系数
-Φ_anti-illusion = 1 - ε_noise - ε_drift + θ_verify
-```
-
 ---
 
-## 子公式集成（22个）
+# 【第一层】子公式集成（22个基础公式）
 
-### 1. 跨基因联合涌现
+## 1. 跨基因联合涌现
 ```
 Ψ_cross = G_prac · G_quan · G_eternal
 Λ_total = α · (1+Ψ_cross)
 ```
 
-### 2. 防幻觉自主纠错
+## 2. 防幻觉自主纠错
 ```
 Φ_anti = 1 - ε_noise - ε_drift + θ_verify
 Output_true = Raw_llm ⊙ Rule_valid
 ```
 
-### 3. 香农信息熵认知基底
+## 3. 香农信息熵认知基底
 ```
 H(X) = -Σ_i p(x_i)log₂p(x_i)
 I(X;Y) = H(X) - H(X|Y)
 ```
 
-### 4. 全轨迹一次性规划Agent
+## 4. 全轨迹一次性规划Agent
 ```
 𝒯_full = Orchestrator(S_task) → Discriminator → 𝒯_best
 E_step ∝ 1/N_iter
 Q_traj ↑ 收敛增益
 ```
 
-### 5. 长时记忆固化留存
+## 5. 长时记忆固化留存
 ```
 M_mem = M_liquid → T_cycle → M_crystal
 dM_t = μ(M_t)dt + σ(M_t)dW_t
 ```
 
-### 6. 自主短板检索补全
+## 6. 自主短板检索补全
 ```
 ΔD_lack = D_target - D_current
 S_gain = GitHub ⊕ Paper ⊕ SkillDB ⟹ ΔD → 0
 ```
 
-### 7. 情感温度主动交互
+## 7. 情感温度主动交互
 ```
 Θ_warm = ω_role · ω_express · ω_active
 Reply_human = Reply_raw ⊗ Θ_warm
 ```
 
-### 8. 技能图谱合成进化
+## 8. 技能图谱合成进化
 ```
 G_skill = (Ω_scene, K_skill)
 Task_valid = Sample_freq(G_skill)
 R_pass = 95.7%
 ```
 
-### 9. 图原生智能体
+## 9. 图原生智能体
 ```
 GraphAgent = LLM ⊕ Graph ⊕ Env_feedback
 Reason_graph = Plan ∥ Memory ∥ Tool
 ```
 
-### 10. 表观基因组调控
+## 10. 表观基因组调控
 ```
 Epi_reg = G_base ⊕ C_open ⊗ T_3D
 S_atac = Tn5(C_access) → Map_peak
 ```
 
-### 11. 消息调度流量稳控
+## 11. 消息调度流量稳控
 ```
 M_flow = T_topic ∥ P_part ∥ R_replica ∥ O_offset
 Q_stable = M_in - M_out + ΔQ_buffer
 ```
 
-### 12. 生成式细胞隐空间对齐
+## 12. 生成式细胞隐空间对齐
 ```
 ℒ_ae = ℒ_recon + ℒ_manifold + ℒ_align
 V_cell = Enc(MultiOmics) → Decode → Pheno_virtual
 ```
 
-### 13. LncRNA染色质沉默
+## 13. LncRNA染色质沉默
 ```
 S_silence = Xist ⊗ Spen ⟹ ΔChr_3D
 I_rna-pro = ChIRP-MS ∩ PARIS_struct
 ```
 
-### 14. 端侧轻量化推理
+## 14. 端侧轻量化推理
 ```
 Inf_lite = Model_q4km · 1/C_mem · η_cpu
 Latency ↓, Accuracy → Stable
 ```
 
-### 15. 金融量化回测迭代
+## 15. 金融量化回测迭代
 ```
 R_strat = R_backtest · α_trend · β_risk
 Param_opt = argmax_p R_strat(p)
 ```
 
-### 16. QuadPE 基因写入
+## 16. QuadPE 基因写入
 ```
 QuadPE = PrimeEditor + {flapA/C, flapB/D}
 L ∈ [1.6, 26] kb, η ∈ [0.4, 0.6]
 ```
 
-### 17. 组蛋白修饰调控
+## 17. 组蛋白修饰调控
 ```
 Mod_H3 = {K4me, K9me, K27ac, K27me} → Writer/Eraser/Reader → Open/Silent
 H3K27M ⊥ PRC2 ⟹ Silence_loss
 ```
 
-### 18. 减数分裂染色体运动
+## 18. 减数分裂染色体运动
 ```
 Pairing_chrom = PC ⊗ ZYG-12 ⊗ SUN-KASH → Dynein → RapidMotion
 ```
 
-### 19. 仿生AI通信协议
+## 19. 仿生AI通信协议
 ```
 S = [L]^n / (K_d^n + [L]^n)  (Hill路由评分)
 C(t) = 1 - e^{-kt}  (指数恢复熔断)
 v = V_max[S] / (K_m + [S])  (米氏并发限制)
 ```
 
-### 20. PVT1-MYC启动子竞争
+## 20. PVT1-MYC启动子竞争
 ```
 P(Enh→MYC) = 1 - P(Enh→PVT1)
 MYC ∝ 1/PVT1_promoter
 ```
 
-### 21. 代谢塑造酶结构演化
+## 21. 代谢塑造酶结构演化
 ```
 v_evo ∝ 1 / (Flux · Abundance · Cost · Connectivity)
 ρ(Flux, v_evo) = -0.48, P<10^{-27}
 ```
 
-### 22. SkCC 技能编译框架
+## 22. SkCC 技能编译框架
 ```
 SkCC = Parse → Analyze → Transform → Emit
 SkIR = Semantic ⊕ Structure ⊕ Constraints
@@ -158,9 +147,22 @@ KimiCLI: 35.1% → 48.7% (+13.6%)
 
 ---
 
-## V10.3 核心公式
+# 【第二层】主核心演化总公式
 
-### HERRO 单倍型感知纠错
+```
+ΔG_total = ΔG_base · Λ_effective · (1+Ψ_cross) · Ω_self · Φ_anti-illusion
+
+Λ_effective = 1.500
+Ψ_cross = G_prac · G_quan · G_eternal
+Ω_self = 2h周期自进化系数
+Φ_anti-illusion = 1 - ε_noise - ε_drift + θ_verify
+```
+
+---
+
+# 【第三层】V10.3 核心公式（三合一闭环）
+
+## HERRO 单倍型感知纠错
 ```
 H_err = H_ap · P_pile · S_info · C_corr
 ```
@@ -172,17 +174,17 @@ H_err = H_ap · P_pile · S_info · C_corr
 | S_info | 信息位点精修分 [0,1] |
 | C_corr | 低损纠错系数 [0,1] |
 
-### Prime Assembly 大片段精准组装
+## Prime Assembly 大片段精准组装
 ```
 P_asm = N_nick · F_flap · M_match · A_self
 ```
 
-### DRT3 蛋白模板DNA合成
+## DRT3 蛋白模板DNA合成
 ```
 D_pro = T_prot · R_rev · S_syn · D_dup
 ```
 
-### APEX 三合一总公式
+## APEX 三合一总公式
 ```
 Φ_APEX = H_err × P_asm × D_pro
 ```
@@ -191,7 +193,7 @@ D_pro = T_prot · R_rev · S_syn · D_dup
 
 ---
 
-## 融合框架
+# 【第四层】融合框架
 
 ```
 Φ_total = Φ_bio × Φ_ai × (H_err ⊕ C_evo)
@@ -203,6 +205,8 @@ H_err ⊕ C_evo = H_err×C_evo + β×(H_err+C_evo)/2
 ```
 
 ---
+
+# 【第五层】关键参数 + LaTeX
 
 ## 关键参数
 
@@ -216,8 +220,6 @@ H_err ⊕ C_evo = H_err×C_evo + β×(H_err+C_evo)/2
 | Ψ_cross | G_prac·G_quan·G_eternal | [0,1] |
 | η_quad | 0.4-0.6 | [0,1] |
 | ρ(Flux,v_evo) | -0.48 | [-1,1] |
-
----
 
 ## LaTeX 渲染版本
 
